@@ -25,6 +25,14 @@ const PRFT = artifacts.require('./contracts/tokens/PRFT.sol');
 
 let weth;
 
+
+// Decimal
+const decimals = web3.utils.toBN(18);
+// Amount of token
+const tokenAmount = web3.utils.toBN(10000);
+
+const tokenAmountHex = '0x' + tokenAmount.mul(web3.utils.toBN(10).pow(decimals)).toString('hex');
+
 module.exports = function (deployer, network, accounts) {
   if (network === 'development') return
 
@@ -34,7 +42,7 @@ module.exports = function (deployer, network, accounts) {
             let deposits = []
 
             for(let account of accounts) {
-              deposits.push(weth.deposit({ from: account, value: 10000e18 }))
+              deposits.push(weth.deposit({ from: account, value: tokenAmountHex }))
             }
 
             await Promise.all(deposits)

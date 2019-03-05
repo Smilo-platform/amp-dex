@@ -25,36 +25,44 @@ const DAI = artifacts.require('./contracts/tokens/DAI.sol');
 const TUSD = artifacts.require('./contracts/tokens/TUSD.sol');
 const USDC = artifacts.require('./contracts/tokens/USDC.sol');
 
+
+// Decimal
+const decimals = web3.utils.toBN(18);
+// Amount of token
+const tokenAmount = web3.utils.toBN(10000000000);
+
+const tokenAmountHex = '0x' + tokenAmount.mul(web3.utils.toBN(10).pow(decimals)).toString('hex');
+
 module.exports = function (deployer, network, accounts) {
     let admin = accounts[0]
-    deployer.deploy(BNB, admin, 10000000000e18).then(async () => {
-        await deployer.deploy(OMG, admin, 10000000000e18);
-        await deployer.deploy(ZRX, admin, 10000000000e18);
-        await deployer.deploy(AE, admin, 10000000000e18);
-        await deployer.deploy(TRX, admin, 10000000000e18);
-        await deployer.deploy(MKR, admin, 10000000000e18);
-        await deployer.deploy(BAT, admin, 10000000000e18);
-        await deployer.deploy(REP, admin, 10000000000e18);
-        await deployer.deploy(BTM, admin, 10000000000e18);
-        await deployer.deploy(NPXS, admin, 10000000000e18);
-        await deployer.deploy(WTC, admin, 10000000000e18);
-        await deployer.deploy(KCS, admin, 10000000000e18);
-        await deployer.deploy(GNT, admin, 10000000000e18);
-        await deployer.deploy(PPT, admin, 10000000000e18);
-        await deployer.deploy(SNT, admin, 10000000000e18);
-        await deployer.deploy(DGX, admin, 10000000000e18);
-        await deployer.deploy(MITH, admin, 10000000000e18);
-        await deployer.deploy(AION, admin, 10000000000e18);
-        await deployer.deploy(LRC, admin, 10000000000e18);
-        await deployer.deploy(FUN, admin, 10000000000e18);
-        await deployer.deploy(LRC, admin, 10000000000e18);
-        await deployer.deploy(FUN, admin, 10000000000e18);
-        await deployer.deploy(KNC, admin, 10000000000e18);
-        await deployer.deploy(LOOM, admin, 10000000000e18);
-        await deployer.deploy(PRFT, admin, 10000000000e18);
-        await deployer.deploy(TUSD, admin, 10000000000e18);
-        await deployer.deploy(DAI, admin, 10000000000e18);
-        await deployer.deploy(TUSD, admin, 10000000000e18);
-        await deployer.deploy(USDC, admin, 10000000000e18);
+    deployer.deploy(BNB, admin, tokenAmountHex).then(async () => {
+        await deployer.deploy(OMG, admin, tokenAmountHex);
+        await deployer.deploy(ZRX, admin, tokenAmountHex);
+        await deployer.deploy(AE, admin, tokenAmountHex);
+        await deployer.deploy(TRX, admin, tokenAmountHex);
+        await deployer.deploy(MKR, admin, tokenAmountHex);
+        await deployer.deploy(BAT, admin, tokenAmountHex);
+        await deployer.deploy(REP, admin, tokenAmountHex);
+        await deployer.deploy(BTM, admin, tokenAmountHex);
+        await deployer.deploy(NPXS, admin, tokenAmountHex);
+        await deployer.deploy(WTC, admin, tokenAmountHex);
+        await deployer.deploy(KCS, admin, tokenAmountHex);
+        await deployer.deploy(GNT, admin, tokenAmountHex);
+        await deployer.deploy(PPT, admin, tokenAmountHex);
+        await deployer.deploy(SNT, admin, tokenAmountHex);
+        await deployer.deploy(DGX, admin, tokenAmountHex);
+        await deployer.deploy(MITH, admin, tokenAmountHex);
+        await deployer.deploy(AION, admin, tokenAmountHex);
+        await deployer.deploy(LRC, admin, tokenAmountHex);
+        await deployer.deploy(FUN, admin, tokenAmountHex);
+        await deployer.deploy(LRC, admin, tokenAmountHex);
+        await deployer.deploy(FUN, admin, tokenAmountHex);
+        await deployer.deploy(KNC, admin, tokenAmountHex);
+        await deployer.deploy(LOOM, admin, tokenAmountHex);
+        await deployer.deploy(PRFT, admin, tokenAmountHex);
+        await deployer.deploy(TUSD, admin, tokenAmountHex);
+        await deployer.deploy(DAI, admin, tokenAmountHex);
+        await deployer.deploy(TUSD, admin, tokenAmountHex);
+        await deployer.deploy(USDC, admin, tokenAmountHex);
     })
 };

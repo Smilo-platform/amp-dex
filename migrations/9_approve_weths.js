@@ -24,6 +24,14 @@ const KNC = artifacts.require('./contracts/tokens/KNC.sol');
 const LOOM = artifacts.require('./contracts/tokens/LOOM.sol');
 const PRFT = artifacts.require('./contracts/tokens/PRFT.sol');
 
+
+// Decimal
+const decimals = web3.utils.toBN(18);
+// Amount of token
+const tokenAmount = web3.utils.toBN(500000);
+
+const tokenAmountHex = '0x' + tokenAmount.mul(web3.utils.toBN(10).pow(decimals)).toString('hex');
+
 module.exports = function (deployer, network, accounts) {
   let weth;
   let exchange;
@@ -37,7 +45,7 @@ module.exports = function (deployer, network, accounts) {
             exchange = await Exchange.deployed();
 
             for(let account of accounts) {
-              approvals.push(weth.approve(exchange.address, 500000e18, { from: account }))
+              approvals.push(weth.approve(exchange.address, tokenAmountHex, { from: account }))
             }
 
             await Promise.all(approvals)

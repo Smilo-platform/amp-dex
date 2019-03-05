@@ -27,6 +27,14 @@ const DAI = artifacts.require('./contracts/tokens/DAI.sol');
 
 let tokens = []
 
+
+// Decimal
+const decimals = web3.utils.toBN(18);
+// Amount of token
+const tokenAmount = web3.utils.toBN(1000000);
+
+const tokenAmountHex = '0x' + tokenAmount.mul(web3.utils.toBN(10).pow(decimals)).toString('hex');
+
 const toTxHash = (value) => {
   if (typeof value === "string") {
     // this is probably a tx hash already
@@ -108,7 +116,7 @@ module.exports = function (deployer, network, accounts) {
             try {
               for (let i = 0; i < tokens.length -1 ; i++) {
                 for (let j = 0; j < addresses.length - 1; j++) {
-                  transfers.push(tokens[i].transfer(addresses[j], 1000000e18, { from: admin }))
+                  transfers.push(tokens[i].transfer(addresses[j], tokenAmountHex, { from: admin }))
                 }
               }
 

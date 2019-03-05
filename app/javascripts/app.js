@@ -6,7 +6,7 @@ import { default as Web3} from 'web3';
 import { default as contract } from 'truffle-contract'
 
 // Import our contract artifacts and turn them into usable abstractions.
-import metacoin_artifacts from '../../build/contracts/MetaCoin.json'
+import metacoin_artifacts from '../../build/contracts/OMG.json'
 
 // MetaCoin is our usable abstraction, which we'll use through the code below.
 var MetaCoin = contract(metacoin_artifacts);
@@ -27,6 +27,7 @@ window.App = {
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function(err, accs) {
       if (err != null) {
+        console.log(err);
         alert("There was an error fetching your accounts.");
         return;
       }
@@ -95,7 +96,7 @@ window.addEventListener('load', function() {
   } else {
     console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:22000"));
   }
 
   App.start();

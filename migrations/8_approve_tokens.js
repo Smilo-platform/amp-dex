@@ -30,6 +30,13 @@ let exchange;
 let tokens = []
 
 
+// Decimal
+const decimals = web3.utils.toBN(18);
+// Amount of token
+const tokenAmount = web3.utils.toBN(1000000);
+
+const tokenAmountHex = '0x' + tokenAmount.mul(web3.utils.toBN(10).pow(decimals)).toString('hex');
+
 module.exports = function (deployer, network, accounts) {
 
   if (network === 'development') return
@@ -69,7 +76,7 @@ module.exports = function (deployer, network, accounts) {
             if (network !== 'rinkeby') {
               for(let token of tokens) {
                 for(let account of accounts) {
-                  tokenApprovals.push(token.approve(exchange.address, 1000000e18, { from: account }))
+                  tokenApprovals.push(token.approve(exchange.address, tokenAmountHex, { from: account }))
                 }
               }
             }
